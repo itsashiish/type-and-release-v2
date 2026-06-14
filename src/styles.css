@@ -1,0 +1,67 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme {
+  --color-canvas: hsl(240 10% 3%);
+  --color-ink: hsl(0 0% 98%);
+  --color-haze: hsl(260 30% 15%);
+  --color-glow: hsl(190 80% 80%);
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fluid-drift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes dissolve-up {
+  0% { opacity: 0.7; transform: translateY(0) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-140px) scale(1.06); filter: blur(14px); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes hint-fade {
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 0.32; }
+}
+
+.ambient-field {
+  background: radial-gradient(circle at 50% 50%, var(--color-haze) 0%, var(--color-canvas) 100%);
+  background-size: 200% 200%;
+  animation: fluid-drift 22s ease-in-out infinite;
+}
+
+.dissolving-text {
+  animation: dissolve-up 5s var(--ease-out-expo) forwards;
+}
+
+.cursor-blink {
+  animation: breathe 1.5s ease-in-out infinite;
+}
+
+.hint-pulse {
+  animation: hint-fade 4s ease-in-out infinite;
+}
+
+html, body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Hide native textarea scrollbar for the writing surface */
+.surface-input {
+  scrollbar-width: none;
+}
+.surface-input::-webkit-scrollbar {
+  display: none;
+}
